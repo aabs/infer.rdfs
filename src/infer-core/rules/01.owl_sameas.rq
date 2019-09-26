@@ -1,0 +1,22 @@
+﻿PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT
+{ 
+	GRAPH <http://industrialinference.com/inferred/> {
+		?x ?p ?o .
+		?y ?p ?o .  
+	}
+}
+WHERE
+{
+	{
+		?x owl:sameAs ?y.
+		?x ?p ?o .
+	} 
+	UNION 
+	{
+		?y owl:sameAs ?x.
+		?y ?p ?o .
+	}
+}

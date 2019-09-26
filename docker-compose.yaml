@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+    blazegraph:
+        image: metaphacts/blazegraph-basic:2.2.0-20160908.003514-6
+        hostname: blazegraph
+        container_name: blazegraph
+        ports:
+            - "8889:8080"
+            - "8890:80"

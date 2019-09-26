@@ -1,8 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>infer_core</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="rules\01.owl_sameas.rq" />
+    <None Remove="rules\rdfs2.rq" />
+    <None Remove="rules\rdfs3.rq" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="rules\01.owl_sameas.rq" />
+    <EmbeddedResource Include="rules\rdfs2.rq" />
+    <EmbeddedResource Include="rules\rdfs3.rq" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="dotNetRDF" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.0.0" />
+  </ItemGroup>
 
 </Project>
