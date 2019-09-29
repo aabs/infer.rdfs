@@ -1,0 +1,13 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT { 
+GRAPH <http://industrialinference.com/inferred/> {
+    ?c rdfs:subClassOf ?c1 .
+    ?c rdfs:subClassOf ?c2 .
+    ?c rdfs:subClassOf ?cn .
+} } WHERE {
+    ?c owl:intersectionOf ?x .
+    LIST[?x ?c1 ... ?cn]	
+}

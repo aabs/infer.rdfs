@@ -1,0 +1,19 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT { 
+GRAPH <http://industrialinference.com/contradictions/> {
+    ?x rdf:type owl:AllDisjointProperties .
+    ?x owl:members ?y .
+    LIST[?y ?p1 ... ?pn]	
+    ?u ?pi ?v .
+    ?u ?pj ?v .
+} } WHERE {
+    ?x rdf:type owl:AllDisjointProperties .
+    ?x owl:members ?y .
+    LIST[?y ?p1 ... ?pn]	
+    ?u ?pi ?v .
+    ?u ?pj ?v .
+} 
+

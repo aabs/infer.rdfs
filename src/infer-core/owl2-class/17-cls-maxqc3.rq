@@ -1,0 +1,17 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT { 
+GRAPH <http://industrialinference.com/inferred/> {
+    ?y1 owl:sameAs ?y2 .
+} } WHERE {
+    ?x owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger .	
+    ?x owl:onProperty ?p .	
+    ?x owl:onClass ?c .	
+    ?u rdf:type ?x .	
+    ?u ?p ?y1 .	
+    ?y1 rdf:type ?c .	
+    ?u ?p ?y2 .	
+    ?y2 rdf:type ?c .	
+}

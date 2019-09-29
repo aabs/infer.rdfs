@@ -1,0 +1,16 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT { 
+GRAPH <http://industrialinference.com/inferred/> {
+    ?u1 ?p ?un+1 .
+} } WHERE {
+    ?p owl:propertyChainAxiom ?x .
+    LIST[?x ?p1 ... ?pn]	
+    ?u1 ?p1 ?u2 .
+    ?u2 ?p2 ?u3 .
+    ...	
+    ?un ?pn ?un+1 .
+} 
+

@@ -1,0 +1,20 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT { 
+GRAPH <http://industrialinference.com/inferred/> {
+    ?x owl:sameAs ?y .
+} } WHERE {
+    ?c owl:hasKey ?u .
+    LIST[?u ?p1 ... ?pn]	
+    ?x rdf:type ?c .
+    ?x ?p1 ?z1 .
+    ...	
+    ?x ?pn ?zn .
+    ?y rdf:type ?c .
+    ?y ?p1 ?z1 .
+    ...	
+    ?y ?pn ?zn .
+} 
+

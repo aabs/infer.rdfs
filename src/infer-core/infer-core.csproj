@@ -6,6 +6,64 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="owl2-class\01-cls-thing.rq" />
+    <None Remove="owl2-class\02-cls-nothing1.rq" />
+    <None Remove="owl2-class\03-cls-nothing2.rq" />
+    <None Remove="owl2-class\04-cls-int1.rq" />
+    <None Remove="owl2-class\05-cls-int2.rq" />
+    <None Remove="owl2-class\06-cls-uni.rq" />
+    <None Remove="owl2-class\07-cls-com.rq" />
+    <None Remove="owl2-class\08-cls-svf1.rq" />
+    <None Remove="owl2-class\09-cls-svf2.rq" />
+    <None Remove="owl2-class\10-cls-avf.rq" />
+    <None Remove="owl2-class\11-cls-hv1.rq" />
+    <None Remove="owl2-class\12-cls-hv2.rq" />
+    <None Remove="owl2-class\13-cls-maxc1.rq" />
+    <None Remove="owl2-class\14-cls-maxc2.rq" />
+    <None Remove="owl2-class\15-cls-maxqc1.rq" />
+    <None Remove="owl2-class\16-cls-maxqc2.rq" />
+    <None Remove="owl2-class\17-cls-maxqc3.rq" />
+    <None Remove="owl2-class\18-cls-maxqc4.rq" />
+    <None Remove="owl2-class\19-cls-oo.rq" />
+    <None Remove="owl2-properties\01-prp-dom.rq" />
+    <None Remove="owl2-properties\02-prp-rng.rq" />
+    <None Remove="owl2-properties\03-prp-fp.rq" />
+    <None Remove="owl2-properties\04-prp-ifp.rq" />
+    <None Remove="owl2-properties\05-prp-irp.rq" />
+    <None Remove="owl2-properties\06-prp-symp.rq" />
+    <None Remove="owl2-properties\07-prp-asyp.rq" />
+    <None Remove="owl2-properties\08-prp-trp.rq" />
+    <None Remove="owl2-properties\09-prp-spo1.rq" />
+    <None Remove="owl2-properties\10-prp-spo2.rq" />
+    <None Remove="owl2-properties\11-prp-eqp1.rq" />
+    <None Remove="owl2-properties\12-prp-eqp2.rq" />
+    <None Remove="owl2-properties\13-prp-pdw.rq" />
+    <None Remove="owl2-properties\14-prp-adp.rq" />
+    <None Remove="owl2-properties\15-prp-inv1.rq" />
+    <None Remove="owl2-properties\16-prp-inv2.rq" />
+    <None Remove="owl2-properties\17-prp-key.rq" />
+    <None Remove="owl2-properties\18-prp-npa1.rq" />
+    <None Remove="owl2-properties\19-prp-npa2.rq" />
+    <None Remove="owl2-schema\01-scm-cls.rq" />
+    <None Remove="owl2-schema\02-scm-sco.rq" />
+    <None Remove="owl2-schema\03-scm-eqc1.rq" />
+    <None Remove="owl2-schema\04-scm-eqc2.rq" />
+    <None Remove="owl2-schema\05-scm-op.rq" />
+    <None Remove="owl2-schema\06-scm-dp.rq" />
+    <None Remove="owl2-schema\07-scm-spo.rq" />
+    <None Remove="owl2-schema\08-scm-eqp1.rq" />
+    <None Remove="owl2-schema\09-scm-eqp2.rq" />
+    <None Remove="owl2-schema\10-scm-dom1.rq" />
+    <None Remove="owl2-schema\11-scm-dom2.rq" />
+    <None Remove="owl2-schema\12-scm-rng1.rq" />
+    <None Remove="owl2-schema\13-scm-rng2.rq" />
+    <None Remove="owl2-schema\14-scm-hv.rq" />
+    <None Remove="owl2-schema\15-scm-svf1.rq" />
+    <None Remove="owl2-schema\16-scm-svf2.rq" />
+    <None Remove="owl2-schema\17-scm-avf1.rq" />
+    <None Remove="owl2-schema\18-scm-avf2.rq" />
+    <None Remove="owl2-schema\19-scm-int.rq" />
+    <None Remove="owl2-schema\20-scm-uni.rq" />
     <None Remove="rdfs-rules\rdfs02.rq" />
     <None Remove="rdfs-rules\rdfs03.rq" />
     <None Remove="rdfs-rules\rdfs04a.rq" />
@@ -22,6 +80,45 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="owl2-properties\01-prp-dom.rq" />
+    <EmbeddedResource Include="owl2-properties\02-prp-rng.rq" />
+    <EmbeddedResource Include="owl2-properties\03-prp-fp.rq" />
+    <EmbeddedResource Include="owl2-properties\04-prp-ifp.rq" />
+    <EmbeddedResource Include="owl2-properties\05-prp-irp.rq" />
+    <EmbeddedResource Include="owl2-properties\06-prp-symp.rq" />
+    <EmbeddedResource Include="owl2-properties\07-prp-asyp.rq" />
+    <EmbeddedResource Include="owl2-properties\08-prp-trp.rq" />
+    <EmbeddedResource Include="owl2-properties\09-prp-spo1.rq" />
+    <EmbeddedResource Include="owl2-properties\10-prp-spo2.rq" />
+    <EmbeddedResource Include="owl2-properties\11-prp-eqp1.rq" />
+    <EmbeddedResource Include="owl2-properties\12-prp-eqp2.rq" />
+    <EmbeddedResource Include="owl2-properties\13-prp-pdw.rq" />
+    <EmbeddedResource Include="owl2-properties\14-prp-adp.rq" />
+    <EmbeddedResource Include="owl2-properties\15-prp-inv1.rq" />
+    <EmbeddedResource Include="owl2-properties\16-prp-inv2.rq" />
+    <EmbeddedResource Include="owl2-properties\17-prp-key.rq" />
+    <EmbeddedResource Include="owl2-properties\18-prp-npa1.rq" />
+    <EmbeddedResource Include="owl2-properties\19-prp-npa2.rq" />
+    <EmbeddedResource Include="owl2-schema\01-scm-cls.rq" />
+    <EmbeddedResource Include="owl2-schema\02-scm-sco.rq" />
+    <EmbeddedResource Include="owl2-schema\03-scm-eqc1.rq" />
+    <EmbeddedResource Include="owl2-schema\04-scm-eqc2.rq" />
+    <EmbeddedResource Include="owl2-schema\05-scm-op.rq" />
+    <EmbeddedResource Include="owl2-schema\06-scm-dp.rq" />
+    <EmbeddedResource Include="owl2-schema\07-scm-spo.rq" />
+    <EmbeddedResource Include="owl2-schema\08-scm-eqp1.rq" />
+    <EmbeddedResource Include="owl2-schema\09-scm-eqp2.rq" />
+    <EmbeddedResource Include="owl2-schema\10-scm-dom1.rq" />
+    <EmbeddedResource Include="owl2-schema\11-scm-dom2.rq" />
+    <EmbeddedResource Include="owl2-schema\12-scm-rng1.rq" />
+    <EmbeddedResource Include="owl2-schema\13-scm-rng2.rq" />
+    <EmbeddedResource Include="owl2-schema\14-scm-hv.rq" />
+    <EmbeddedResource Include="owl2-schema\15-scm-svf1.rq" />
+    <EmbeddedResource Include="owl2-schema\16-scm-svf2.rq" />
+    <EmbeddedResource Include="owl2-schema\17-scm-avf1.rq" />
+    <EmbeddedResource Include="owl2-schema\18-scm-avf2.rq" />
+    <EmbeddedResource Include="owl2-schema\19-scm-int.rq" />
+    <EmbeddedResource Include="owl2-schema\20-scm-uni.rq" />
     <EmbeddedResource Include="rdfs-rules\rdfs04a.rq" />
     <EmbeddedResource Include="rdfs-rules\rdfs04b.rq" />
     <EmbeddedResource Include="rdfs-rules\rdfs12.rq" />
@@ -41,6 +138,28 @@
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="dotNetRDF" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="owl2-class\01-cls-thing.rq" />
+    <EmbeddedResource Include="owl2-class\02-cls-nothing1.rq" />
+    <EmbeddedResource Include="owl2-class\03-cls-nothing2.rq" />
+    <EmbeddedResource Include="owl2-class\04-cls-int1.rq" />
+    <EmbeddedResource Include="owl2-class\05-cls-int2.rq" />
+    <EmbeddedResource Include="owl2-class\06-cls-uni.rq" />
+    <EmbeddedResource Include="owl2-class\07-cls-com.rq" />
+    <EmbeddedResource Include="owl2-class\08-cls-svf1.rq" />
+    <EmbeddedResource Include="owl2-class\09-cls-svf2.rq" />
+    <EmbeddedResource Include="owl2-class\10-cls-avf.rq" />
+    <EmbeddedResource Include="owl2-class\11-cls-hv1.rq" />
+    <EmbeddedResource Include="owl2-class\12-cls-hv2.rq" />
+    <EmbeddedResource Include="owl2-class\13-cls-maxc1.rq" />
+    <EmbeddedResource Include="owl2-class\14-cls-maxc2.rq" />
+    <EmbeddedResource Include="owl2-class\15-cls-maxqc1.rq" />
+    <EmbeddedResource Include="owl2-class\16-cls-maxqc2.rq" />
+    <EmbeddedResource Include="owl2-class\17-cls-maxqc3.rq" />
+    <EmbeddedResource Include="owl2-class\18-cls-maxqc4.rq" />
+    <EmbeddedResource Include="owl2-class\19-cls-oo.rq" />
   </ItemGroup>
 
 </Project>

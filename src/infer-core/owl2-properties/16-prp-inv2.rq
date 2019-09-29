@@ -1,0 +1,12 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT { 
+GRAPH <http://industrialinference.com/inferred/> {
+    ?y ?p1 ?x .
+} } WHERE {
+    ?p1 owl:QUERYEND ?p2 .
+    ?x ?p2 ?y .
+} 
+
