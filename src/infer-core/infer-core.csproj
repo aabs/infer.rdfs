@@ -6,37 +6,35 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="rules\01.owl_sameas.rq" />
-    <None Remove="rules\rdfs02.rq" />
-    <None Remove="rules\rdfs03.rq" />
-    <None Remove="rules\rdfs04a.rq" />
-    <None Remove="rules\rdfs04b.rq" />
-    <None Remove="rules\rdfs10.rq" />
-    <None Remove="rules\rdfs11.rq" />
-    <None Remove="rules\rdfs12.rq" />
-    <None Remove="rules\rdfs13.rq" />
-    <None Remove="rules\rdfs5.rq" />
-    <None Remove="rules\rdfs6.rq" />
-    <None Remove="rules\rdfs7.rq" />
-    <None Remove="rules\rdfs8.rq" />
-    <None Remove="rules\rdfs9.rq" />
+    <None Remove="rdfs-rules\rdfs02.rq" />
+    <None Remove="rdfs-rules\rdfs03.rq" />
+    <None Remove="rdfs-rules\rdfs04a.rq" />
+    <None Remove="rdfs-rules\rdfs04b.rq" />
+    <None Remove="rdfs-rules\rdfs10.rq" />
+    <None Remove="rdfs-rules\rdfs11.rq" />
+    <None Remove="rdfs-rules\rdfs12.rq" />
+    <None Remove="rdfs-rules\rdfs13.rq" />
+    <None Remove="rdfs-rules\rdfs5.rq" />
+    <None Remove="rdfs-rules\rdfs6.rq" />
+    <None Remove="rdfs-rules\rdfs7.rq" />
+    <None Remove="rdfs-rules\rdfs8.rq" />
+    <None Remove="rdfs-rules\rdfs9.rq" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="rules\01.owl_sameas.rq" />
-    <EmbeddedResource Include="rules\rdfs04a.rq" />
-    <EmbeddedResource Include="rules\rdfs04b.rq" />
-    <EmbeddedResource Include="rules\rdfs12.rq" />
-    <EmbeddedResource Include="rules\rdfs13.rq" />
-    <EmbeddedResource Include="rules\rdfs11.rq" />
-    <EmbeddedResource Include="rules\rdfs02.rq" />
-    <EmbeddedResource Include="rules\rdfs03.rq" />
-    <EmbeddedResource Include="rules\rdfs10.rq" />
-    <EmbeddedResource Include="rules\rdfs9.rq" />
-    <EmbeddedResource Include="rules\rdfs8.rq" />
-    <EmbeddedResource Include="rules\rdfs7.rq" />
-    <EmbeddedResource Include="rules\rdfs6.rq" />
-    <EmbeddedResource Include="rules\rdfs5.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs04a.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs04b.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs12.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs13.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs11.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs02.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs03.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs10.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs9.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs8.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs7.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs6.rq" />
+    <EmbeddedResource Include="rdfs-rules\rdfs5.rq" />
   </ItemGroup>
 
   <ItemGroup>
