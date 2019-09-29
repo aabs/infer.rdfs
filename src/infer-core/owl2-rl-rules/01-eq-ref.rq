@@ -1,0 +1,14 @@
+﻿PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT
+{ 
+  GRAPH <http://industrialinference.com/inferred/> {
+	?s owl:sameAs ?s .
+	?p owl:sameAs ?p .
+	?o owl:sameAs ?o .
+  }
+}
+WHERE
+{
+	?s ?p ?o .
+} 

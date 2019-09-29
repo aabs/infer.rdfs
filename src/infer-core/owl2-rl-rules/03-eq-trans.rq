@@ -1,0 +1,14 @@
+﻿PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+INSERT
+{ 
+  GRAPH <http://industrialinference.com/inferred/> {
+	?x owl:sameAs ?z .
+  }
+}
+WHERE
+{
+	?x owl:sameAs ?y .
+	?y owl:sameAs ?z .
+} 

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -7,14 +7,36 @@
 
   <ItemGroup>
     <None Remove="rules\01.owl_sameas.rq" />
-    <None Remove="rules\rdfs2.rq" />
-    <None Remove="rules\rdfs3.rq" />
+    <None Remove="rules\rdfs02.rq" />
+    <None Remove="rules\rdfs03.rq" />
+    <None Remove="rules\rdfs04a.rq" />
+    <None Remove="rules\rdfs04b.rq" />
+    <None Remove="rules\rdfs10.rq" />
+    <None Remove="rules\rdfs11.rq" />
+    <None Remove="rules\rdfs12.rq" />
+    <None Remove="rules\rdfs13.rq" />
+    <None Remove="rules\rdfs5.rq" />
+    <None Remove="rules\rdfs6.rq" />
+    <None Remove="rules\rdfs7.rq" />
+    <None Remove="rules\rdfs8.rq" />
+    <None Remove="rules\rdfs9.rq" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="rules\01.owl_sameas.rq" />
-    <EmbeddedResource Include="rules\rdfs2.rq" />
-    <EmbeddedResource Include="rules\rdfs3.rq" />
+    <EmbeddedResource Include="rules\rdfs04a.rq" />
+    <EmbeddedResource Include="rules\rdfs04b.rq" />
+    <EmbeddedResource Include="rules\rdfs12.rq" />
+    <EmbeddedResource Include="rules\rdfs13.rq" />
+    <EmbeddedResource Include="rules\rdfs11.rq" />
+    <EmbeddedResource Include="rules\rdfs02.rq" />
+    <EmbeddedResource Include="rules\rdfs03.rq" />
+    <EmbeddedResource Include="rules\rdfs10.rq" />
+    <EmbeddedResource Include="rules\rdfs9.rq" />
+    <EmbeddedResource Include="rules\rdfs8.rq" />
+    <EmbeddedResource Include="rules\rdfs7.rq" />
+    <EmbeddedResource Include="rules\rdfs6.rq" />
+    <EmbeddedResource Include="rules\rdfs5.rq" />
   </ItemGroup>
 
   <ItemGroup>

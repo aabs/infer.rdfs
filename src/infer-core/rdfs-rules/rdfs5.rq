@@ -1,0 +1,13 @@
+﻿PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+INSERT
+{ 
+	GRAPH <http://industrialinference.com/inferred/> {
+	?xxx rdfs:subPropertyOf ?zzz .
+	}
+}
+WHERE
+{
+?xxx rdfs:subPropertyOf ?yyy .
+?yyy rdfs:subPropertyOf ?zzz .
+} 
