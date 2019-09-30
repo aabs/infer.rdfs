@@ -1,11 +1,6 @@
-﻿using System;
-using System.Linq;
-using Autofac;
+﻿using Autofac;
 using infer_core;
 using NUnit.Framework;
-using VDS.RDF;
-using VDS.RDF.Query;
-using VDS.RDF.Update;
 
 namespace infer_tests
 {
@@ -19,8 +14,9 @@ namespace infer_tests
     public class RdfsEntailmentTests : RdfTestBase
     {
         #region rdfs2
+
         // # rdfs2 - attribution of type by property domain
-        // 
+        //
         // if (?p rdfs:domain ?s. && ?s2 ?p ?o .)
         // then ?s2 rdf:type ?s .
 
@@ -33,10 +29,12 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:s2", "rdf:type", "a:s"));
         }
-        #endregion
+
+        #endregion rdfs2
 
         #region rdfs3
-        // # rdfs3	
+
+        // # rdfs3
         // if (?p rdfs:range ?x  &&  ?y ?p ?z)
         // then ?z rdf:type ?x.
 
@@ -44,18 +42,21 @@ namespace infer_tests
         public void Test_rdfs3()
         {
             _assert("a:p", "rdfs:range", "a:x");
-            _assert("a:y", "a:p","a:z");
+            _assert("a:y", "a:p", "a:z");
             var inf = _container.Resolve<IInferenceEngine>();
             inf.Infer();
             Assert.True(is_asserted("a:z", "rdf:type", "a:x"));
         }
-        #endregion
+
+        #endregion rdfs3
 
         #region rdfs4a
+
         /*
          * rdfs4a:	if(xxx aaa yyy ._ then (xxx rdf:type rdfs:Resource .)
 
          */
+
         [Test]
         public void Test_rdfs4a()
         {
@@ -64,13 +65,16 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "rdf:type", "rdfs:Resource"));
         }
-        #endregion
+
+        #endregion rdfs4a
 
         #region rdfs4b
+
         /*
          * rdfs4a:	if(xxx aaa yyy ._ then (xxx rdf:type rdfs:Resource .)
 
          */
+
         [Test]
         public void Test_rdfs4b()
         {
@@ -79,13 +83,16 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:yyy", "rdf:type", "rdfs:Resource"));
         }
-        #endregion
+
+        #endregion rdfs4b
 
         #region rdfs5
+
         /*
          * rdfs5:if (xxx rdfs:subPropertyOf yyy .&& yyy rdfs:subPropertyOf zzz .) then ( xxx rdfs:subPropertyOf zzz .)
 
          */
+
         [Test]
         public void Test_rdfs5()
         {
@@ -95,12 +102,16 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "rdfs:subPropertyOf", "a:zzz"));
         }
-        #endregion
+
+        #endregion rdfs5
+
         #region rdfs6
+
         /*
          * rdfs6: if (xxx rdf:type rdf:Property .) then ( xxx rdfs:subPropertyOf xxx .)
 
          */
+
         [Test]
         public void Test_rdfs6()
         {
@@ -109,11 +120,15 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "rdfs:subPropertyOf", "a:xxx"));
         }
-        #endregion
+
+        #endregion rdfs6
+
         #region rdfs7
+
         /*
          * rdfs7: if ( aaa rdfs:subPropertyOf bbb . && xxx aaa yyy . ) then ( xxx bbb yyy .)
          */
+
         [Test]
         public void Test_rdfs7()
         {
@@ -123,11 +138,15 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "a:bbb", "a:yyy"));
         }
-        #endregion
+
+        #endregion rdfs7
+
         #region rdfs8
+
         /*
          * rdfs8: if ( xxx rdf:type rdfs:Class .) then ( xxx rdfs:subClassOf rdfs:Resource .)
          */
+
         [Test]
         public void Test_rdfs8()
         {
@@ -136,11 +155,15 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "rdfs:subClassOf", "rdfs:Resource"));
         }
-        #endregion
+
+        #endregion rdfs8
+
         #region rdfs9
+
         /*
          * rdfs9: if ( xxx rdfs:subClassOf yyy . && zzz rdf:type xxx .) then ( zzz rdf:type yyy .)
          */
+
         [Test]
         public void Test_rdfs9()
         {
@@ -150,11 +173,15 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:zzz", "rdf:type", "a:yyy"));
         }
-        #endregion
+
+        #endregion rdfs9
+
         #region rdfs10
+
         /*
          * rdfs10: if (xxx rdf:type rdfs:Class .) then (xxx rdfs:subClassOf xxx .)
          */
+
         [Test]
         public void Test_rdfs10()
         {
@@ -163,12 +190,16 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "rdfs:subClassOf", "a:xxx"));
         }
-        #endregion
+
+        #endregion rdfs10
+
         #region rdfs11
+
         /*
          * rdfs11: if ( xxx rdfs:subClassOf yyy . && yyy rdfs:subClassOf zzz .)	then ( xxx rdfs:subClassOf zzz .)
 
          */
+
         [Test]
         public void Test_rdfs11()
         {
@@ -178,11 +209,15 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "rdfs:subClassOf", "a:zzz"));
         }
-        #endregion
+
+        #endregion rdfs11
+
         #region rdfs12
+
         /*
          * rdfs12: if ( xxx rdf:type rdfs:ContainerMembershipProperty .) then (	xxx rdfs:subPropertyOf rdfs:member .)
          */
+
         [Test]
         public void Test_rdfs12()
         {
@@ -191,11 +226,15 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "rdfs:subPropertyOf", "rdfs:member"));
         }
-        #endregion
+
+        #endregion rdfs12
+
         #region rdfs13
+
         /*
          * rdfs13: if (xxx rdf:type rdfs:Datatype .) then ( xxx rdfs:subClassOf rdfs:Literal .
          */
+
         [Test]
         public void Test_rdfs13()
         {
@@ -204,6 +243,7 @@ namespace infer_tests
             inf.Infer();
             Assert.True(is_asserted("a:xxx", "rdfs:subClassOf", "rdfs:Literal"));
         }
-        #endregion
+
+        #endregion rdfs13
     }
 }
