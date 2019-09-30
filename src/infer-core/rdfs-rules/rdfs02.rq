@@ -4,11 +4,11 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 INSERT
 { 
 	GRAPH <http://industrialinference.com/inferred/> {
-		?yyy rdf:type ?xxx .
+		?s2 rdf:type ?s .
 	}
 }
 WHERE
 {
-	?aaa rdfs:domain ?xxx .
-	?yyy ?aaa ?zzz .
+	?p rdfs:domain ?s .
+	?s2 ?p ?o .
 } 

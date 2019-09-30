@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using VDS.RDF.Parsing;
 using VDS.RDF.Query;
@@ -6,32 +7,68 @@ using VDS.RDF.Update;
 
 namespace infer_core
 {
+    /// <summary>
+    /// Inference engine that works to infer new triples by running SPARQL queries against an existing graph
+    /// </summary>
+    /// <remarks>
+    /// <para>Refer to <a href="https://www.w3.org/TR/rdf11-mt/#patterns-of-rdfs-entailment-informative">here</a> for more details about the inference rules</para>
+    /// </remarks>
     public class InferenceEngine : IInferenceEngine
     {
-        private readonly ISparqlQueryProcessor _queryProcessor;
         private readonly ISparqlUpdateProcessor _updateProcessor;
 
-        public InferenceEngine(ISparqlQueryProcessor queryProcessor, ISparqlUpdateProcessor updateProcessor)
+        public InferenceEngine(ISparqlUpdateProcessor updateProcessor)
         {
-            this._queryProcessor = queryProcessor;
             this._updateProcessor = updateProcessor;
         }
 
-        public void Infer()
+        public void Infer(EntailmentRegime entailmentRegime = EntailmentRegime.RDFS)
         {
-            Assembly assembly = GetType().Assembly;
-            foreach (var ruleFile in assembly.GetManifestResourceNames())
+            foreach (var rule in GetRulesForRegime(entailmentRegime, GetType().Assembly))
             {
-                using var reader = new StreamReader(assembly.GetManifestResourceStream(ruleFile));
-                string queryString = reader.ReadToEnd();
-                var sps = new SparqlParameterizedString(queryString);
-                if (!string.IsNullOrWhiteSpace(queryString))
+                if (!string.IsNullOrWhiteSpace(rule))
                 {
+                    var sps = new SparqlParameterizedString(rule);
                     var parser = new SparqlUpdateParser();
                     var query = parser.ParseFromString(sps);
                     query.Process(_updateProcessor);
                 }
             }
+        }
+
+        public IEnumerable<string> GetRulesForRegime(EntailmentRegime entailmentRegime, Assembly asm)
+        {
+            List<string> resources = new List<string>(asm.GetManifestResourceNames());
+            resources.Sort();
+            foreach (var ruleFile in resources)
+            {
+                switch (entailmentRegime)
+                {
+                    case EntailmentRegime.RDFS when ruleFile.Contains("rdfs_rules"):
+                        yield return ReadResource(ruleFile, asm);
+                        break;
+                    case EntailmentRegime.OWL2_EL when ruleFile.Contains("owl2_schema") || ruleFile.Contains("owl2_properties"):
+                        yield return ReadResource(ruleFile, asm);
+                        break;
+                    case EntailmentRegime.OWL2_QL when ruleFile.Contains("owl2_class"):
+                        yield return ReadResource(ruleFile, asm);
+                        break;
+                    case EntailmentRegime.OWL2_RL when ruleFile.Contains("owl2_class"):
+                        yield return ReadResource(ruleFile, asm);
+                        break;
+                    case EntailmentRegime.OWL2_FULL when ruleFile.Contains("owl2_"):
+                        yield return ReadResource(ruleFile, asm);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        protected string ReadResource(string path, Assembly assembly)
+        {
+            using var reader = new StreamReader(assembly.GetManifestResourceStream(path));
+            return reader.ReadToEnd();
         }
     }
 }
