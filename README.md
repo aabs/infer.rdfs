@@ -5,3 +5,5 @@ This is a simple inference engine, available as a CLI tool, that will materialis
 ## Caveats
 
 1. It currently only properly implements the entailments defined for RDFS in the [RDF 1.1 Semantics](https://www.w3.org/TR/rdf11-mt/#patterns-of-rdfs-entailment-informative).
+2. Not sure about performance characteristics - they haven't yet been tested
+3. No incremental materialisation - currently only available in batch mode.
