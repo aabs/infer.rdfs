@@ -1,3 +1,6 @@
+
+[![Build status](https://ci.appveyor.com/api/projects/status/lowjt20jtupg5m43/branch/master?svg=true)](https://ci.appveyor.com/project/aabs/inference-engine/branch/master)
+
 # Inference Engine
 
 This is a simple inference engine, available as a CLI tool, that will materialise inferences on a remote triple store.
