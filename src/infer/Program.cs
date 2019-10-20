@@ -24,7 +24,7 @@ namespace infer
                        if (o.Endpoint.IsWellFormedOriginalString())
                        {
                            var eng = Startup.Container.Resolve<IInferenceEngine>();
-                           eng.Infer();
+                           eng.Infer(null);
                        }
                        else
                        {

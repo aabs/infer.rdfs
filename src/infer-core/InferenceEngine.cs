@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using VDS.RDF.Parsing;
@@ -13,7 +14,7 @@ namespace infer_core
     /// <remarks>
     /// <para>Refer to <a href="https://www.w3.org/TR/rdf11-mt/#patterns-of-rdfs-entailment-informative">here</a> for more details about the inference rules</para>
     /// </remarks>
-    public class InferenceEngine : IInferenceEngine
+    public class InferenceEngine : BaseInferenceEngine, IInferenceEngine
     {
         private readonly ISparqlUpdateProcessor _updateProcessor;
 
@@ -22,7 +23,7 @@ namespace infer_core
             this._updateProcessor = updateProcessor;
         }
 
-        public void Infer(EntailmentRegime entailmentRegime = EntailmentRegime.RDFS)
+        public void Infer(Uri _, EntailmentRegime entailmentRegime = EntailmentRegime.RDFS)
         {
             foreach (var rule in GetRulesForRegime(entailmentRegime, GetType().Assembly))
             {
@@ -36,6 +37,11 @@ namespace infer_core
             }
         }
 
+
+    }
+
+    public abstract class BaseInferenceEngine
+    {
         public IEnumerable<string> GetRulesForRegime(EntailmentRegime entailmentRegime, Assembly asm)
         {
             List<string> resources = new List<string>(asm.GetManifestResourceNames());
@@ -69,6 +75,5 @@ namespace infer_core
         {
             using var reader = new StreamReader(assembly.GetManifestResourceStream(path));
             return reader.ReadToEnd();
-        }
-    }
+        }    }
 }

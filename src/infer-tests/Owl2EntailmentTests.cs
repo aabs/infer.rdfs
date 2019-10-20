@@ -20,7 +20,7 @@ namespace infer_tests
             _assertd("a:subj", "a:p2", "world");
             Assert.That(_tripleStore.Triples.Count(), Is.EqualTo(3));
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.That(_tripleStore.Triples.Count(), Is.Not.EqualTo(3));
         }
 
@@ -38,7 +38,7 @@ namespace infer_tests
             Assert.That(results1, Is.Empty);
             Assert.That(results2, Is.Empty);
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             results1 = _inferences.GetTriplesWithSubjectPredicate(b, p1);
             results2 = _inferences.GetTriplesWithSubjectPredicate(b, p1);
             Assert.That(results1, Is.Not.Empty);

@@ -30,7 +30,7 @@ namespace infer_tests
             _assert("a:p", "rdfs:domain", "a:s");
             _assert("a:s2", "a:p", "a:o");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:s2", "rdf:type", "a:s"));
         }
         #endregion
@@ -46,7 +46,7 @@ namespace infer_tests
             _assert("a:p", "rdfs:range", "a:x");
             _assert("a:y", "a:p","a:z");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:z", "rdf:type", "a:x"));
         }
         #endregion
@@ -61,7 +61,7 @@ namespace infer_tests
         {
             _assert("a:xxx", "a:aaa", "a:yyy");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "rdf:type", "rdfs:Resource"));
         }
         #endregion
@@ -76,7 +76,7 @@ namespace infer_tests
         {
             _assert("a:xxx", "a:aaa", "a:yyy");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:yyy", "rdf:type", "rdfs:Resource"));
         }
         #endregion
@@ -92,7 +92,7 @@ namespace infer_tests
             _assert("a:xxx", "rdfs:subPropertyOf", "a:yyy");
             _assert("a:yyy", "rdfs:subPropertyOf", "a:zzz");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "rdfs:subPropertyOf", "a:zzz"));
         }
         #endregion
@@ -106,7 +106,7 @@ namespace infer_tests
         {
             _assert("a:xxx", "rdf:type", "rdf:Property");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "rdfs:subPropertyOf", "a:xxx"));
         }
         #endregion
@@ -120,7 +120,7 @@ namespace infer_tests
             _assert("a:aaa", "rdfs:subPropertyOf", "a:bbb");
             _assert("a:xxx", "a:aaa", "a:yyy");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "a:bbb", "a:yyy"));
         }
         #endregion
@@ -133,7 +133,7 @@ namespace infer_tests
         {
             _assert("a:xxx", "rdf:type", "rdfs:Class");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "rdfs:subClassOf", "rdfs:Resource"));
         }
         #endregion
@@ -147,7 +147,7 @@ namespace infer_tests
             _assert("a:xxx", "rdfs:subClassOf", "a:yyy");
             _assert("a:zzz", "rdf:type", "a:xxx");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:zzz", "rdf:type", "a:yyy"));
         }
         #endregion
@@ -160,7 +160,7 @@ namespace infer_tests
         {
             _assert("a:xxx", "rdf:type", "rdfs:Class");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "rdfs:subClassOf", "a:xxx"));
         }
         #endregion
@@ -175,7 +175,7 @@ namespace infer_tests
             _assert("a:xxx", "rdfs:subClassOf", "a:yyy");
             _assert("a:yyy", "rdfs:subClassOf", "a:zzz");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "rdfs:subClassOf", "a:zzz"));
         }
         #endregion
@@ -188,7 +188,7 @@ namespace infer_tests
         {
             _assert("a:xxx", "rdf:type", "rdfs:ContainerMembershipProperty");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "rdfs:subPropertyOf", "rdfs:member"));
         }
         #endregion
@@ -201,7 +201,7 @@ namespace infer_tests
         {
             _assert("a:xxx", "rdf:type", "rdfs:Datatype");
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(null);
             Assert.True(is_asserted("a:xxx", "rdfs:subClassOf", "rdfs:Literal"));
         }
         #endregion

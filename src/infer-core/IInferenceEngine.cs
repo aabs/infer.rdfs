@@ -8,6 +8,6 @@ namespace infer_core
     }
     public interface IInferenceEngine
     {
-        void Infer(EntailmentRegime entailmentRegime = EntailmentRegime.RDFS);
+        void Infer(Uri sourceGraphUri, EntailmentRegime entailmentRegime = EntailmentRegime.RDFS);
     }
 }
