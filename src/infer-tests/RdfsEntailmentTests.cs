@@ -246,18 +246,5 @@ namespace infer_tests
 
         #endregion rdfs13
 
-        #region Real World Examples
-        [Test]
-        public void TestSubpropertyPropogation()
-        {
-            _assert("a:isWifeOf", "rdfs:domain", "a:Woman");
-            _assert("a:isWifeOf", "rdfs:subPropertyOf", "a:isSpouseOf");
-            _assert("a:isSpouseOf", "rdfs:range", "a:Person");
-            _assert("a:Anne", "a:isWifeOf", "a:Charlie");
-            var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
-            Assert.True(is_asserted("a:Charlie", "rdf:type", "a:Person"));
-        }
-        #endregion
     }
 }

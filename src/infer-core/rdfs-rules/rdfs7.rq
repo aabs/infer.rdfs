@@ -3,11 +3,11 @@
 INSERT
 { 
 	GRAPH <http://industrialinference.com/inferred/> {
-	?xxx ?bbb ?yyy .
+		?xxx ?bbb ?yyy .
 	}
 }
 WHERE
 {
-?aaa rdfs:subPropertyOf ?bbb .
-?xxx ?aaa ?yyy .
+	?aaa rdfs:subPropertyOf+ ?bbb .
+	?xxx ?aaa ?yyy .
 } 
