@@ -20,7 +20,7 @@ namespace infer_tests
             _assertd("a:subj", "a:p2", "world");
             Assert.That(_tripleStore.Triples.Count(), Is.EqualTo(3));
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer(null);
+            inf.Infer(null, EntailmentRegime.RDFSPLUS);
             Assert.That(_tripleStore.Triples.Count(), Is.Not.EqualTo(3));
         }
 
@@ -30,17 +30,17 @@ namespace infer_tests
             _assert("a:subj", "owl:sameAs", "a:obj");
             _assertd("a:subj", "a:p1", "hello");
             _assertd("a:subj", "a:p2", "world");
-            var b = qname("a:obj");
+            var obj = qname("a:obj");
             var p1 = qname("a:p1");
             var p2 = qname("a:p2");
-            var results1 = _inferences.GetTriplesWithSubjectPredicate(b, p1);
-            var results2 = _inferences.GetTriplesWithSubjectPredicate(b, p1);
+            var results1 = _inferences.GetTriplesWithSubjectPredicate(obj, p1);
+            var results2 = _inferences.GetTriplesWithSubjectPredicate(obj, p2);
             Assert.That(results1, Is.Empty);
             Assert.That(results2, Is.Empty);
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer(null);
-            results1 = _inferences.GetTriplesWithSubjectPredicate(b, p1);
-            results2 = _inferences.GetTriplesWithSubjectPredicate(b, p1);
+            inf.Infer(null, EntailmentRegime.RDFSPLUS);
+            results1 = _inferences.GetTriplesWithSubjectPredicate(obj, p1);
+            results2 = _inferences.GetTriplesWithSubjectPredicate(obj, p2);
             Assert.That(results1, Is.Not.Empty);
             Assert.That(results2, Is.Not.Empty);
         }

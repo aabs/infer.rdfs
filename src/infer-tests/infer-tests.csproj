@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\infer-core\infer-core.csproj" />
+    <ProjectReference Include="..\triple-store\triple-store.csproj" />
   </ItemGroup>
 
 </Project>

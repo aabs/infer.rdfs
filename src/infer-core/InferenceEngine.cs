@@ -53,6 +53,9 @@ namespace infer_core
                     case EntailmentRegime.RDFS when ruleFile.Contains("rdfs_rules"):
                         yield return ReadResource(ruleFile, asm);
                         break;
+                    case EntailmentRegime.RDFSPLUS when ruleFile.Contains("rdfs_rules") || ruleFile.Contains("owl2_equality"):
+                        yield return ReadResource(ruleFile, asm);
+                        break;
                     case EntailmentRegime.OWL2_EL when ruleFile.Contains("owl2_schema") || ruleFile.Contains("owl2_properties"):
                         yield return ReadResource(ruleFile, asm);
                         break;
