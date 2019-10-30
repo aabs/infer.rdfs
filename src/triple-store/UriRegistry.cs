@@ -24,7 +24,10 @@ namespace triple_store
             lutUris[val] = u;
             return val;
         }
-
+        public Uri Lookup(int i)
+        {
+            return lutUris[i];
+        }
         public int Get(Uri u)
         {
             var hashCode = u.GetHashCode();
