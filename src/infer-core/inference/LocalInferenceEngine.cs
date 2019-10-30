@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Query;
@@ -23,7 +23,7 @@ namespace infer_core.inference
         public void Infer(Uri sourceGraphUri, EntailmentRegime entailmentRegime = EntailmentRegime.RDFS)
         {
             // 1. Load Target Graph
-            IGraph g = LoadGraphLocally(sourceGraphUri);
+            var g = LoadGraphLocally(sourceGraphUri);
             // 2. Load Rule Set
             var rules = LoadRules();
             // 4. While there are inferences to be made
@@ -32,32 +32,36 @@ namespace infer_core.inference
             throw new NotImplementedException();
         }
 
-        public IEnumerable<InsertCommand> LoadRules()
+        private RuleMapping ConvertInsertCommandToRuleMapping(InsertCommand ic)
+        {
+            var result = new RuleMapping(ic.WherePattern.TriplePatterns, ic.InsertPattern.ChildGraphPatterns[0].TriplePatterns);
+            return result;
+        }
+
+        public IEnumerable<RuleMapping> LoadRules()
         {
             foreach (var rule in GetRulesForRegime(EntailmentRegime.RDFS, GetType().Assembly))
-            {
                 if (!string.IsNullOrWhiteSpace(rule))
                 {
                     var sps = new SparqlParameterizedString(rule);
                     var parser = new SparqlUpdateParser();
-                    SparqlUpdateCommandSet r = parser.ParseFromString(sps);
-                    foreach (var c in r.Commands)
-                    {
-                        yield return (InsertCommand)c;
-                    }
+                    var r = parser.ParseFromString(sps);
+                    return r.Commands
+                        .Cast<InsertCommand>()
+                        .Select(ConvertInsertCommandToRuleMapping);
                 }
-            }
+            return new RuleMapping[]{};
         }
 
-        IGraph LoadGraphLocally(Uri sourceGraphUri)
+        private IGraph LoadGraphLocally(Uri sourceGraphUri)
         {
-            SparqlParameterizedString queryString = new SparqlParameterizedString();
+            var queryString = new SparqlParameterizedString();
             queryString.Namespaces.AddNamespace("ex", new Uri("http://example.org/ns#"));
             queryString.CommandText = "CONSTRUCT WHERE { GRAPH ?srcGraph { ?s ?p ?o . } }";
             queryString.SetUri("srcGraph", sourceGraphUri);
-            SparqlQueryParser parser = new SparqlQueryParser();
-            SparqlQuery query = parser.ParseFromString(queryString);
-            IGraph g = _queryProcessor.ProcessQuery(query) as IGraph;
+            var parser = new SparqlQueryParser();
+            var query = parser.ParseFromString(queryString);
+            var g = _queryProcessor.ProcessQuery(query) as IGraph;
             return g;
         }
     }

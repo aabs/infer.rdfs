@@ -3,6 +3,7 @@ using System.Linq;
 using Autofac;
 using infer_core;
 using NUnit.Framework;
+using Shouldly;
 using VDS.RDF;
 using VDS.RDF.Query;
 using VDS.RDF.Update;
@@ -33,16 +34,32 @@ namespace infer_tests
             var obj = qname("a:obj");
             var p1 = qname("a:p1");
             var p2 = qname("a:p2");
-            var results1 = _inferences.GetTriplesWithSubjectPredicate(obj, p1);
-            var results2 = _inferences.GetTriplesWithSubjectPredicate(obj, p2);
-            Assert.That(results1, Is.Empty);
-            Assert.That(results2, Is.Empty);
+            has_literal("a:obj", "a:p1", "hello").ShouldBe(false);
+            has_literal("a:obj", "a:p2", "world").ShouldBe(false);
             var inf = _container.Resolve<IInferenceEngine>();
             inf.Infer(null, EntailmentRegime.RDFSPLUS);
-            results1 = _inferences.GetTriplesWithSubjectPredicate(obj, p1);
-            results2 = _inferences.GetTriplesWithSubjectPredicate(obj, p2);
-            Assert.That(results1, Is.Not.Empty);
-            Assert.That(results2, Is.Not.Empty);
+            has_literal("a:obj", "a:p1", "hello").ShouldBe(true);
+            has_literal("a:obj", "a:p2", "world").ShouldBe(true);
+        }
+
+
+        [Test]
+        public void TestSameAsPropogatesProperties2()
+        {
+            var ts = GetSoccerTripleStore();
+
+            _assert("a:subj", "owl:sameAs", "a:obj");
+            _assertd("a:subj", "a:p1", "hello");
+            _assertd("a:subj", "a:p2", "world");
+            var obj = qname("a:obj");
+            var p1 = qname("a:p1");
+            var p2 = qname("a:p2");
+            has_literal("a:obj", "a:p1", "hello").ShouldBe(false);
+            has_literal("a:obj", "a:p2", "world").ShouldBe(false);
+            var inf = _container.Resolve<IInferenceEngine>();
+            inf.Infer(null, EntailmentRegime.RDFSPLUS);
+            has_literal("a:obj", "a:p1", "hello").ShouldBe(true);
+            has_literal("a:obj", "a:p2", "world").ShouldBe(true);
         }
 
     }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Autofac;
 using infer_core;
 using NUnit.Framework;
@@ -53,6 +55,13 @@ namespace infer_tests
             return results1.Any(t => t.Object.Equals(nobj));
         }
 
+        protected bool has_literal(string s, string p, string _literal)
+        {
+            var results1 = _inferences.GetTriplesWithSubjectPredicate(qname(s), qname(p));
+            var nobj = literal(_literal);
+            return results1.Any(t => t.Object.Equals(nobj));
+        }
+
         protected ILiteralNode literal(string value) => _defaultGraph.CreateLiteralNode(value);
 
         protected IUriNode node(string name) => _defaultGraph.CreateUriNode($"a:{name}");
@@ -77,6 +86,16 @@ namespace infer_tests
             builder.Register<ISparqlQueryProcessor>(_ => qp);
             builder.Register<ISparqlUpdateProcessor>(_ => up);
             _container = builder.Build();
+        }
+
+        public TripleStore GetSoccerTripleStore()
+        {
+            var ts = new TripleStore();
+            var g = new Graph();
+            g.LoadFromEmbeddedResource("infer_tests.test_data.soccer.ttl");
+            g.BaseUri = null;
+            ts.Add(g, true);
+            return ts;
         }
     }
 }

@@ -66,5 +66,6 @@ namespace infer_core
         {
             using var reader = new StreamReader(assembly.GetManifestResourceStream(path));
             return reader.ReadToEnd();
-        }    }
+        }
+    }
 }

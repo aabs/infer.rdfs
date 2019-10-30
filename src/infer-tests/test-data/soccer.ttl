@@ -1,0 +1,38 @@
+﻿@prefix : <http://industrialinference.com/soccer/> .
+@prefix n: <http://industrialinference.com/soccer/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix time: <http://www.w3.org/2006/time#>.
+
+<http://industrialinference.com/soccer> a owl:Ontology .
+    
+:Mammal a rdfs:Class;
+    rdfs:label "Mammal"@en .
+
+:Human a rdfs:Class;
+    rdfs:label "Human"@en ;
+    rdfs:comment "A top level concept for a human" .
+
+:Person owl:sameAs :Human;
+    rdfs:label "Person"@en ;
+    rdfs:comment "A top level concept for a human" .
+
+:Player rdfs:subClassOf :Person;
+    rdfs:label "Player"@en ;
+    rdfs:comment "A player is a type of Person that has a contract to play with some team." 
+    .
+
+:Team a rdfs:Class ; 
+    rdfs:label "Team"@en .
+
+:Game a rdfs:Class .
+
+:participant rdfs:range :Team.
+
+:homeTeam rdfs:subPropertyOf :participant; 
+	rdfs:domain :Game.
+
+:awayTeam rdfs:subPropertyOf :participant; 
+	rdfs:domain :Game.
