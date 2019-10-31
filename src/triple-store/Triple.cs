@@ -22,6 +22,23 @@ namespace triple_store
             Object = @object;
         }
 
+        public Triple(int s, int p, int o, UriRegistry externalRegistry = null)
+        {
+            if (externalRegistry != null)
+            {
+                effectiveIndex = externalRegistry;
+            }
+            else
+            {
+                effectiveIndex = defaultIndex;
+            }
+            _subject = s;
+            _predicate = p;
+            _object = o;
+        }
+        public (int, int, int) Get()
+            => (_subject, _predicate, _object);
+
         int _subject;
         public Uri Subject
         {
