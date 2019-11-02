@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Inference.Storage;
 using NUnit.Framework;
 using Shouldly;
-using triple_store;
+using System;
 
-namespace infer_tests
+namespace Inference.Test
 {
     [TestFixture]
     public class UriRegistryTests
@@ -18,14 +14,15 @@ namespace infer_tests
             var sut = new UriRegistry();
             sut.ShouldNotBeNull();
         }
+
         [Test]
         public void TestCanRegisterUri()
         {
             var sut = new UriRegistry();
             var id = sut.Add(new Uri("http://www.example.com/1"));
-            id.ShouldBe(1);
+            id.ShouldBe(0);
             var id2 = sut.Add(new Uri("http://www.example.com/2"));
-            id2.ShouldBe(2);
+            id2.ShouldBe(1);
         }
 
         [Test]
@@ -36,8 +33,8 @@ namespace infer_tests
             sut.Add(new Uri("http://www.example.com/2"));
             var id = sut.Get(new Uri("http://www.example.com/1"));
             var id2 = sut.Get(new Uri("http://www.example.com/2"));
-            id.ShouldBe(1);
-            id2.ShouldBe(2);
+            id.ShouldBe(0);
+            id2.ShouldBe(1);
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using VDS.RDF;
-
-namespace infer_tests
+﻿namespace Inference.Test
 {
     public abstract class TestBase
     {
-
     }
-
 }

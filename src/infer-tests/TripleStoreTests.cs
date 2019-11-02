@@ -1,9 +1,10 @@
-﻿using NUnit.Framework;
+﻿using Inference.Storage;
+using NUnit.Framework;
 using Shouldly;
 using System;
-using triple_store;
+using System.Diagnostics;
 
-namespace infer_tests
+namespace Inference.Test
 {
     [TestFixture]
     public class TripleStoreTests
@@ -11,14 +12,14 @@ namespace infer_tests
         [Test]
         public void TestCanCreateTripleStore()
         {
-            var sut = new TripleStore();
+            var sut = new TripleCollection();
             sut.ShouldNotBeNull();
         }
 
         [Test]
         public void TestCanCreateTriple()
         {
-            var sut = new TripleStore();
+            var sut = new TripleCollection();
             Uri s = new Uri("urn:1");
             Uri p = new Uri("urn:2");
             Uri o = new Uri("urn:3");
@@ -32,7 +33,7 @@ namespace infer_tests
         [Test]
         public void TestCanStoreTriple()
         {
-            var sut = new TripleStore();
+            var sut = new TripleCollection();
             Uri s = new Uri("urn:1");
             Uri p = new Uri("urn:2");
             Uri o = new Uri("urn:3");
@@ -43,7 +44,7 @@ namespace infer_tests
         [Test]
         public void TestCanRetrieveTriple()
         {
-            var sut = new TripleStore();
+            var sut = new TripleCollection();
             Uri s = new Uri("urn:1");
             Uri p = new Uri("urn:2");
             Uri o = new Uri("urn:3");
@@ -57,14 +58,14 @@ namespace infer_tests
         }
 
         [Test]
-        public void TestCanStoreAndRetrieveManyTriple()
+        public void TestCanStoreAndRetrieveManyTriples()
         {
-            var sut = new TripleStore();
+            var sut = new TripleCollection();
             for (int i = 0; i < 10000; i++)
             {
                 Uri s = new Uri($"urn:{i}");
-                Uri p = new Uri($"urn:{i+1}");
-                Uri o = new Uri($"urn:{i+2}");
+                Uri p = new Uri($"urn:{i + 1}");
+                Uri o = new Uri($"urn:{i + 2}");
                 Triple t = sut.NewTriple(s, p, o);
                 sut.InsertTriple(t);
             }
@@ -73,6 +74,54 @@ namespace infer_tests
             t2.Subject.ShouldBe(new Uri($"urn:500"));
             t2.Predicate.ShouldBe(new Uri($"urn:501"));
             t2.Object.ShouldBe(new Uri($"urn:502"));
+        }
+        [Test]
+        public void TestCanStoreAndEnumerateManyTriples()
+        {
+            var sut = new TripleCollection();
+            for (int i = 0; i < 100; i++)
+            {
+                Uri s = new Uri($"urn:{i}");
+                Uri p = new Uri($"urn:{i + 1}");
+                Uri o = new Uri($"urn:{i + 2}");
+                Triple t = sut.NewTriple(s, p, o);
+                sut.InsertTriple(t);
+            }
+
+            int ct = 0;
+            foreach (var t in sut)
+            {
+                ct++;
+                if (ct % 20 == 0)
+                {
+                    Debug.WriteLine($"<{t.Subject}> <{t.Predicate}> <{t.Object}> .");
+                }
+            }
+        }
+        [Test]
+        public void TestCanStoreAndEnumerateManyCommonTriples()
+        {
+            Uri pred = new Uri($"urn:common-predicate");
+            var predId = RdfCompressionContext.Instance.UriRegistry.Add(pred);
+            var sut = new CommonPredicateTripleCollection(predId);
+            for (int i = 0; i < 100; i++)
+            {
+                Uri s = new Uri($"urn:{i}");
+                Uri p = pred;
+                Uri o = new Uri($"urn:{i + 2}");
+                Triple t = sut.NewTriple(s, p, o);
+                sut.InsertTriple(t);
+            }
+
+            int ct = 0;
+            foreach (var t in sut)
+            {
+                ct++;
+                if (ct % 20 == 0)
+                {
+                    Debug.WriteLine($"<{t.Subject}> <{t.Predicate}> <{t.Object}> .");
+                }
+            }
         }
     }
 }

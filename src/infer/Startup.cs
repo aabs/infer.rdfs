@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Autofac;
+﻿using Autofac;
+using Inference.Core;
+using System;
 using VDS.RDF.Query;
 using VDS.RDF.Update;
-using static infer.Program;
+using static Inference.CLI.Program;
 
-namespace infer
+namespace Inference.CLI
 {
     internal class Startup
     {
@@ -15,7 +14,7 @@ namespace infer
         public static void Configure(Options opts)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<infer_core.InferenceEngine>().AsImplementedInterfaces();
+            builder.RegisterType<InferenceEngine>().AsImplementedInterfaces();
             Console.WriteLine($"SPARQL Endpoint: {opts.Endpoint}");
             builder.Register<ISparqlQueryProcessor>(ctx => new RemoteQueryProcessor(new SparqlRemoteEndpoint(opts.Endpoint)));
             builder.Register<ISparqlUpdateProcessor>(ctx => new RemoteUpdateProcessor(new SparqlRemoteUpdateEndpoint(opts.Endpoint)));

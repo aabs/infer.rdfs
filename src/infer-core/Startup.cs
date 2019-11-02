@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace infer_core
+﻿namespace Inference.Core
 {
-    class Startup
+    internal class Startup
     {
     }
 }

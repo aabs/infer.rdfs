@@ -2,42 +2,26 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace triple_store
+namespace Inference.Storage
 {
     public class Triple : IEquatable<Triple>
     {
-        private static UriRegistry defaultIndex = new UriRegistry();
-        private UriRegistry effectiveIndex = new UriRegistry();
-        public Triple(Uri subject, Uri predicate, Uri @object, UriRegistry externalRegistry = null) 
-        {
-            if (externalRegistry != null)
-            {
-                effectiveIndex = externalRegistry;
-            } 
-            else
-            {
-                effectiveIndex = defaultIndex;
-            }
+        private UriRegistry effectiveIndex { get => RdfCompressionContext.Instance.UriRegistry; }
 
+        public Triple(Uri subject, Uri predicate, Uri @object)
+        {
             Subject = subject;
             Predicate = predicate;
             Object = @object;
         }
 
-        public Triple(int s, int p, int o, UriRegistry externalRegistry = null)
+        public Triple(int s, int p, int o)
         {
-            if (externalRegistry != null)
-            {
-                effectiveIndex = externalRegistry;
-            }
-            else
-            {
-                effectiveIndex = defaultIndex;
-            }
             _subject = s;
             _predicate = p;
             _object = o;
         }
+
         public (int, int, int) Get()
             => (_subject, _predicate, _object);
 
@@ -59,7 +43,8 @@ namespace triple_store
             return HashCode.Combine(_subject, _predicate, _object);
         }
 
-        int _subject;
+        private int _subject;
+
         public Uri Subject
         {
             get
@@ -72,7 +57,8 @@ namespace triple_store
             }
         }
 
-        int _predicate;
+        private int _predicate;
+
         public Uri Predicate
         {
             get
@@ -85,7 +71,8 @@ namespace triple_store
             }
         }
 
-        int _object;
+        private int _object;
+
         public Uri Object
         {
             get

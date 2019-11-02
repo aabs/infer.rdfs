@@ -1,8 +1,8 @@
 {
-  "profiles": {
-    "infer": {
-      "commandName": "Project",
-      "commandLineArgs": "-e http://localhost:8889/blazegraph/namespace/kb/sparql"
+    "profiles": {
+        "infer": {
+            "commandName": "Project",
+            "commandLineArgs": "-e http://localhost:8889/blazegraph/namespace/kb/sparql"
+        }
     }
-  }
 }

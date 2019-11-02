@@ -7,7 +7,7 @@ using VDS.RDF.Query;
 using VDS.RDF.Update;
 using VDS.RDF.Update.Commands;
 
-namespace infer_core.inference
+namespace Inference.Core.Inference
 {
     public class LocalInferenceEngine : BaseInferenceEngine, IInferenceEngine
     {
@@ -50,7 +50,7 @@ namespace infer_core.inference
                         .Cast<InsertCommand>()
                         .Select(ConvertInsertCommandToRuleMapping);
                 }
-            return new RuleMapping[]{};
+            return new RuleMapping[] { };
         }
 
         private IGraph LoadGraphLocally(Uri sourceGraphUri)

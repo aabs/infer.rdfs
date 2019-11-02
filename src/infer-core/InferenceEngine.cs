@@ -6,7 +6,7 @@ using VDS.RDF.Parsing;
 using VDS.RDF.Query;
 using VDS.RDF.Update;
 
-namespace infer_core
+namespace Inference.Core
 {
     /// <summary>
     /// Inference engine that works to infer new triples by running SPARQL queries against an existing graph
@@ -20,7 +20,7 @@ namespace infer_core
 
         public InferenceEngine(ISparqlUpdateProcessor updateProcessor)
         {
-            this._updateProcessor = updateProcessor;
+            _updateProcessor = updateProcessor;
         }
 
         public void Infer(Uri _, EntailmentRegime entailmentRegime = EntailmentRegime.RDFS)
@@ -36,8 +36,6 @@ namespace infer_core
                 }
             }
         }
-
-
     }
 
     public abstract class BaseInferenceEngine
@@ -53,9 +51,11 @@ namespace infer_core
                     case EntailmentRegime.RDFS when ruleFile.Contains("rdfs_rules"):
                         yield return ReadResource(ruleFile, asm);
                         break;
+
                     case EntailmentRegime.RDFSPLUS when ruleFile.Contains("rdfs_rules") || ruleFile.Contains("owl2_equality"):
                         yield return ReadResource(ruleFile, asm);
                         break;
+
                     default:
                         break;
                 }

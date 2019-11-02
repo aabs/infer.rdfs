@@ -1,24 +1,25 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using CommandLine;
-using infer_core;
+using Inference.Core;
+using System;
 
-namespace infer
+namespace Inference.CLI
 {
-    class Program
+    internal class Program
     {
         public class Options
         {
             [Option('e', "endpoint", Required = true, HelpText = "The full SPARQL endpoint of the triple store to infer on")]
             public Uri Endpoint { get; set; }
+
             [Option('v', "verbose", Required = false, HelpText = "Set output to verbose messages.")]
             public bool Verbose { get; set; }
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Parser.Default.ParseArguments<Options>(args)
-                   .WithParsed<Options>(o =>
+                   .WithParsed(o =>
                    {
                        Startup.Configure(o);
                        if (o.Endpoint.IsWellFormedOriginalString())
@@ -33,8 +34,6 @@ namespace infer
                        }
                    });
             Console.WriteLine("Hello World!");
-
-
         }
     }
 }
