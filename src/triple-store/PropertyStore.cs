@@ -4,9 +4,13 @@ using System.Collections.Generic;
 
 namespace Inference.Storage
 {
-    public class CommonPredicateTripleCollection : SuperStore, ITripleStore, IEnumerable<Triple>
+    /// <summary>
+    /// A Triple store where all the triples share a common predicate.
+    /// </summary>
+    /// <remarks>This store provides a way to compress slightly</remarks>
+    public class PropertyStore : SuperStore, ITripleStore, IEnumerable<Triple>
     {
-        public CommonPredicateTripleCollection(int predicate)
+        public PropertyStore(int predicate)
         {
             predicateId = predicate;
         }

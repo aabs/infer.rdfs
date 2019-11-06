@@ -103,7 +103,7 @@ namespace Inference.Test
         {
             Uri pred = new Uri($"urn:common-predicate");
             var predId = RdfCompressionContext.Instance.UriRegistry.Add(pred);
-            var sut = new CommonPredicateTripleCollection(predId);
+            var sut = new PropertyStore(predId);
             for (int i = 0; i < 100; i++)
             {
                 Uri s = new Uri($"urn:{i}");
