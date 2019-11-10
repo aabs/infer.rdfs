@@ -133,6 +133,7 @@ namespace Inference.Test
                 }
             }
         }
+
         [Test]
         public void TestCanRetrieveByMatching()
         {
@@ -151,6 +152,28 @@ namespace Inference.Test
             var results = sut.Match___O(new Uri("urn:5"));
             results.ShouldNotBeEmpty();
             results.Count().ShouldBe(100);
+        }
+
+        [Test]
+        public void TestCanRetrieveByMatching2()
+        {
+            var sut = new TripleCollection();
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    for (int k = 0; k < 10; k++)
+                    {
+                        sut.InsertTriple(new Triple(new Uri($"urn:{i}"), new Uri($"urn:{j}"), new Uri($"urn:{k}")));
+                    }
+                }
+            }
+
+            Uri o = new Uri("urn:3");
+            var results = sut.Match_SPO(new Uri("urn:5"), new Uri("urn:4"), o);
+            results.ShouldNotBeEmpty();
+            results.Count().ShouldBe(1);
+            results.First().Object.ShouldBe(o);
         }
     }
 }
