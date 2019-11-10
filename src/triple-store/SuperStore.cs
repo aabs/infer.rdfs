@@ -64,7 +64,7 @@ namespace Inference.Storage
 
             object IEnumerator.Current => _en.Current;
 
-            Triple IEnumerator<Triple>.Current { get; }
+            Triple IEnumerator<Triple>.Current => _en.Current;
 
             public bool MoveNext() => _en.MoveNext();
 
@@ -74,19 +74,12 @@ namespace Inference.Storage
             {
             }
 
-            bool IEnumerator.MoveNext()
-            {
-                throw new NotImplementedException();
-            }
+            bool IEnumerator.MoveNext() => _en.MoveNext();
 
-            void IEnumerator.Reset()
-            {
-                throw new NotImplementedException();
-            }
+            void IEnumerator.Reset() => _en.Reset();
 
             void IDisposable.Dispose()
             {
-                throw new NotImplementedException();
             }
         }
 
