@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Inference.Storage
 {
-    public class TripleCollection : SuperStore, ITripleStore, IEnumerable<Triple>
+    public class TripleCollection : SuperStore, ITripleStore, IEnumerable<Triple>, IRandomAccessStore
     {
         // 3D sparse matrix for adjacency
 
@@ -44,10 +45,7 @@ namespace Inference.Storage
             array = tmp;
         }
 
-        public override Triple ElementAt(int x)
-        {
-            return new Triple(triples[x, 0], triples[x, 1], triples[x, 2]);
-        }
+        #region Enumeration And Access
 
         IEnumerator<Triple> IEnumerable<Triple>.GetEnumerator()
         {
@@ -63,5 +61,105 @@ namespace Inference.Storage
         {
             return new Enumerator(this);
         }
+        #endregion
+
+        #region IRandomAccessStore
+        public Triple ElementAt(int index)
+        {
+            return new Triple(triples[index, 0], triples[index, 1], triples[index, 2]);
+        }
+
+        public (int, int, int) OrdinalsAt(int index)
+        {
+            return (triples[index, 0], triples[index, 1], triples[index, 2]);
+        }
+
+        public Uri SubjectAt(int index) 
+            => RdfCompressionContext.Instance.UriRegistry.Lookup(SubjectOrdinalAt(index));
+
+        public Uri PredicateAt(int index)
+            => RdfCompressionContext.Instance.UriRegistry.Lookup(PredicateOrdinalAt(index));
+
+        public Uri ObjectAt(int index)
+            => RdfCompressionContext.Instance.UriRegistry.Lookup(ObjectOrdinalAt(index));
+
+        public int SubjectOrdinalAt(int index) => triples[index, 0];
+
+        public int PredicateOrdinalAt(int index) => triples[index, 1];
+
+        public int ObjectOrdinalAt(int index) => triples[index, 2];
+
+        #endregion Enumeration And Access
+
+        #region Enumeration
+        [SuppressMessage("Performance", "CA1815")]
+        [SuppressMessage("Usage", "CA2231")]
+        public struct Enumerator
+        {
+            private IRandomAccessStore _store;
+            private int _currentIndex;
+
+            public Triple Current => _store.ElementAt(_currentIndex);
+
+            internal Enumerator(IRandomAccessStore store)
+            {
+                _store = store;
+                _currentIndex = 0;
+            }
+
+            public bool MoveNext()
+            {
+                if (_currentIndex < _store.Count)
+                {
+                    _currentIndex++;
+                    return true;
+                }
+                return false;
+            }
+
+            public void Reset()
+            {
+                _currentIndex = 0;
+            }
+
+            public override bool Equals(object obj) => throw new NotSupportedException();
+
+            public override int GetHashCode() => throw new NotSupportedException();
+        }
+
+        public class EnumeratorImpl : IEnumerator<Triple>
+        {
+            private Enumerator _en;
+
+            internal EnumeratorImpl(IRandomAccessStore store)
+            {
+                _en = new Enumerator(store);
+            }
+
+            public Triple Current => _en.Current;
+
+            object IEnumerator.Current => _en.Current;
+
+            Triple IEnumerator<Triple>.Current => _en.Current;
+
+            public bool MoveNext() => _en.MoveNext();
+
+            public void Reset() => _en.Reset();
+
+            public void Dispose()
+            {
+            }
+
+            bool IEnumerator.MoveNext() => _en.MoveNext();
+
+            void IEnumerator.Reset() => _en.Reset();
+
+            void IDisposable.Dispose()
+            {
+            }
+        }
+
+
+        #endregion
     }
 }

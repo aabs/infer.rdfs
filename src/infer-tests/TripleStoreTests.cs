@@ -1,14 +1,24 @@
-﻿using Inference.Storage;
+﻿using AutoFixture;
+using Inference.Storage;
 using NUnit.Framework;
 using Shouldly;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Inference.Test
 {
     [TestFixture]
     public class TripleStoreTests
     {
+        private Fixture _fixture;
+
+        [SetUp]
+        public void SetUp()
+        {
+            // Add code that runs before each test method
+            this._fixture = new AutoFixture.Fixture();
+        }
         [Test]
         public void TestCanCreateTripleStore()
         {
@@ -122,6 +132,25 @@ namespace Inference.Test
                     Debug.WriteLine($"<{t.Subject}> <{t.Predicate}> <{t.Object}> .");
                 }
             }
+        }
+        [Test]
+        public void TestCanRetrieveByMatching()
+        {
+            var sut = new TripleCollection();
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    for (int k = 0; k < 10; k++)
+                    {
+                        sut.InsertTriple(new Triple(new Uri($"urn:{i}"), new Uri($"urn:{j}"), new Uri($"urn:{k}")));
+                    }
+                }
+            }
+
+            var results = sut.Match___O(new Uri("urn:5"));
+            results.ShouldNotBeEmpty();
+            results.Count().ShouldBe(100);
         }
     }
 }
