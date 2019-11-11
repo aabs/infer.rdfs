@@ -175,5 +175,28 @@ namespace Inference.Test
             results.Count().ShouldBe(1);
             results.First().Object.ShouldBe(o);
         }
+
+        [Test]
+        public void TestCanJoinUsingMultipleWheres()
+        {
+            var sut = new TripleCollection();
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    for (int k = 0; k < 10; k++)
+                    {
+                        sut.InsertTriple(new Triple(new Uri($"urn:{i}"), new Uri($"urn:{j}"), new Uri($"urn:{k}")));
+                    }
+                }
+            }
+
+            var result = sut.Match_S__(new Uri("urn:3")).Match__P_(new Uri("urn:4"));
+            result.ShouldNotBeEmpty();
+            result.Count().ShouldBe(10);
+            var result2 = result.Match___O(new Uri("urn:5"));
+            result2.ShouldNotBeEmpty();
+            result2.Count().ShouldBe(1);
+        }
     }
 }
