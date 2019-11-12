@@ -4,11 +4,10 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 INSERT
 { 
 	GRAPH <http://industrialinference.com/inferred/> {
-	?xxx rdfs:subClassOf ?zzz .
+		?xxx rdfs:subClassOf ?zzz .
 	}
 }
 WHERE
 {
-?xxx rdfs:subClassOf ?yyy .
-?yyy rdfs:subClassOf ?zzz .
+	?xxx rdfs:subClassOf+ ?zzz .
 } 

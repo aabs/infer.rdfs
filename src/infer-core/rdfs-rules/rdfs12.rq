@@ -4,10 +4,10 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 INSERT
 { 
 	GRAPH <http://industrialinference.com/inferred/> {
-	?xxx rdfs:subPropertyOf rdfs:member .
+		?xxx rdfs:subPropertyOf rdfs:member .
 	}
 }
 WHERE
 {
-?xxx rdf:type rdfs:ContainerMembershipProperty .
+	?xxx rdf:type rdfs:ContainerMembershipProperty .
 } 
