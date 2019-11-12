@@ -1,13 +1,9 @@
-using System;
-using System.Linq;
 using Autofac;
-using infer_core;
+using Inference.Core;
 using NUnit.Framework;
-using VDS.RDF;
-using VDS.RDF.Query;
-using VDS.RDF.Update;
+using System.Linq;
 
-namespace infer_tests
+namespace Inference.Test
 {
     [TestFixture]
     public class InferenceTests : RdfTestBase

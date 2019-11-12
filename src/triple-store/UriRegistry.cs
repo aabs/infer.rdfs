@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace triple_store
+namespace Inference.Storage
 {
     public class UriRegistry
     {
         // LUT for URIs to int
-        private int UriId = 0;
-        Dictionary<int, Uri> lutUris = new Dictionary<int, Uri>();
-        Dictionary<int, int> rlutUris = new Dictionary<int, int>(); // reverse lookup from URI hashcode to ID
+        private int UriId = -1;
+
+        private Dictionary<int, Uri> lutUris = new Dictionary<int, Uri>();
+        private Dictionary<int, int> rlutUris = new Dictionary<int, int>(); // reverse lookup from URI hashcode to ID
 
         public int Add(Uri u)
         {
@@ -24,10 +25,12 @@ namespace triple_store
             lutUris[val] = u;
             return val;
         }
+
         public Uri Lookup(int i)
         {
             return lutUris[i];
         }
+
         public int Get(Uri u)
         {
             var hashCode = u.GetHashCode();
@@ -37,6 +40,5 @@ namespace triple_store
             }
             throw new ApplicationException("URI not recognised");
         }
-
     }
 }

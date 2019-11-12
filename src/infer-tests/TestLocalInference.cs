@@ -1,27 +1,26 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
-using infer_core.inference;
+using Inference.Core.Inference;
 using NUnit.Framework;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VDS.RDF.Query;
 using VDS.RDF.Update;
 
-namespace infer_tests
+namespace Inference.Test
 {
     [TestFixture]
-    class TestLocalInference
+    internal class TestLocalInference
     {
-        Fixture fixture;
+        private Fixture fixture;
+
         [SetUp]
         public void SetUp()
         {
             // Add code that runs before each test method
-           fixture = new Fixture();
-           fixture.Customize(new AutoMoqCustomization());
+            fixture = new Fixture();
+            fixture.Customize(new AutoMoqCustomization());
         }
+
         [Test]
         public void TestCanCreateLocalInferenceEngine()
         {
@@ -30,6 +29,7 @@ namespace infer_tests
             var sut = new LocalInferenceEngine(qp, up);
             sut.ShouldNotBeNull();
         }
+
         [Test]
         public void TestCanLoadRules()
         {

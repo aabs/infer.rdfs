@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using infer_core;
+using Inference.Core;
 using NUnit.Framework;
 
-namespace infer_tests
+namespace Inference.Test
 {
     /// <summary>
     /// test semantics of the inference engine by setting up antecedants and checking consequents of rules.
@@ -245,6 +245,5 @@ namespace infer_tests
         }
 
         #endregion rdfs13
-
     }
 }

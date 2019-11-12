@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <RootNamespace>infer_tests</RootNamespace>
+    <RootNamespace>Inference.Test</RootNamespace>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -21,6 +21,10 @@
     <PackageReference Include="AutoFixture.Idioms" Version="4.11.0" />
     <PackageReference Include="AutoFixture.NUnit3" Version="4.11.0" />
     <PackageReference Include="dotNetRDF" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />

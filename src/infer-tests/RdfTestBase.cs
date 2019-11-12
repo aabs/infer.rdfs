@@ -1,15 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using Autofac;
-using infer_core;
+﻿using Autofac;
+using Inference.Core;
 using NUnit.Framework;
+using System;
+using System.Linq;
 using VDS.RDF;
 using VDS.RDF.Query;
 using VDS.RDF.Update;
 
-namespace infer_tests
+namespace Inference.Test
 {
     public class RdfTestBase
     {
@@ -23,7 +21,7 @@ namespace infer_tests
         private Graph CreateGraph(Uri baseUri)
         {
             var result = new Graph();
-            if (baseUri != default(Uri))
+            if (baseUri != default)
                 result.BaseUri = baseUri;
             result.NamespaceMap.Import(_nsMap);
             return result;

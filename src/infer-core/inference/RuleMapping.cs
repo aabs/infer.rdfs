@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using VDS.RDF.Query.Patterns;
 
-namespace infer_core.inference
+namespace Inference.Core.Inference
 {
     /// <summary>
     /// A class to capture the essentials of an inference rule

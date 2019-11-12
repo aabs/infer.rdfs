@@ -1,28 +1,50 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
-namespace triple_store
+namespace Inference.Storage
 {
-    public class Triple
+    public class Triple : IEquatable<Triple>
     {
-        private static UriRegistry defaultIndex = new UriRegistry();
-        private UriRegistry effectiveIndex = new UriRegistry();
-        public Triple(Uri subject, Uri predicate, Uri @object, UriRegistry externalRegistry = null) 
-        {
-            if (externalRegistry != null)
-            {
-                effectiveIndex = externalRegistry;
-            } 
-            else
-            {
-                effectiveIndex = defaultIndex;
-            }
+        private UriRegistry effectiveIndex { get => RdfCompressionContext.Instance.UriRegistry; }
 
+        public Triple(Uri subject, Uri predicate, Uri @object)
+        {
             Subject = subject;
             Predicate = predicate;
             Object = @object;
         }
 
-        int _subject;
+        public Triple(int s, int p, int o)
+        {
+            _subject = s;
+            _predicate = p;
+            _object = o;
+        }
+
+        public (int, int, int) Get()
+            => (_subject, _predicate, _object);
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Triple);
+        }
+
+        public bool Equals([AllowNull] Triple other)
+        {
+            return other != null &&
+                   _subject == other._subject &&
+                   _predicate == other._predicate &&
+                   _object == other._object;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(_subject, _predicate, _object);
+        }
+
+        private int _subject;
+
         public Uri Subject
         {
             get
@@ -35,7 +57,8 @@ namespace triple_store
             }
         }
 
-        int _predicate;
+        private int _predicate;
+
         public Uri Predicate
         {
             get
@@ -48,7 +71,8 @@ namespace triple_store
             }
         }
 
-        int _object;
+        private int _object;
+
         public Uri Object
         {
             get
@@ -59,6 +83,16 @@ namespace triple_store
             {
                 _object = effectiveIndex.Add(value);
             }
+        }
+
+        public static bool operator ==(Triple left, Triple right)
+        {
+            return EqualityComparer<Triple>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Triple left, Triple right)
+        {
+            return !(left == right);
         }
     }
 }
