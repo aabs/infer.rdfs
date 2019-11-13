@@ -44,7 +44,9 @@ namespace Inference.Storage
         }
 
         private int _subject;
-
+        public int SubjOrd => _subject;
+        public int PredOrd => _predicate;
+        public int ObjOrd => _object;
         public Uri Subject
         {
             get
