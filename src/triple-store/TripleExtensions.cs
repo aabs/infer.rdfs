@@ -68,5 +68,20 @@ namespace Inference.Storage
         where TStore : IEnumerable<Triple> => store.Where(s, p, o, fnMatchSPO);
 
         public static int ToOrdinal(this Uri u) => RdfCompressionContext.Instance.UriRegistry.Get(u);
+
+        public static ITripleStore Assert(this ITripleStore ts, Uri s, Uri p, Uri o)
+        {
+            ts.InsertTriple(new Triple(s, p, o));
+            return ts;
+        }
+    }
+    public static class UriHelpers { 
+        public static Uri u(string s)
+        {
+            Uri result;
+            if (Uri.TryCreate(s, UriKind.Absolute, out result)) return result;
+            throw new FormatException("Invalid URI format");
+        }
+
     }
 }
