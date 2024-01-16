@@ -34,8 +34,7 @@ namespace Inference.Core.Inference
 
         private RuleMapping ConvertInsertCommandToRuleMapping(InsertCommand ic)
         {
-            var result = new RuleMapping(ic.WherePattern.TriplePatterns, ic.InsertPattern.ChildGraphPatterns[0].TriplePatterns);
-            return result;
+            return new RuleMapping(ic.WherePattern.TriplePatterns, ic.InsertPattern.ChildGraphPatterns[0].TriplePatterns);
         }
 
         public IEnumerable<RuleMapping> LoadRules()
@@ -50,7 +49,7 @@ namespace Inference.Core.Inference
                         .Cast<InsertCommand>()
                         .Select(ConvertInsertCommandToRuleMapping);
                 }
-            return new RuleMapping[] { };
+            return Array.Empty<RuleMapping>();
         }
 
         private IGraph LoadGraphLocally(Uri sourceGraphUri)
@@ -61,8 +60,7 @@ namespace Inference.Core.Inference
             queryString.SetUri("srcGraph", sourceGraphUri);
             var parser = new SparqlQueryParser();
             var query = parser.ParseFromString(queryString);
-            var g = _queryProcessor.ProcessQuery(query) as IGraph;
-            return g;
+            return _queryProcessor.ProcessQuery(query) as IGraph;
         }
     }
 }

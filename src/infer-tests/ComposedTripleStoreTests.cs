@@ -17,7 +17,7 @@ namespace Inference.Test
         public void SetUp()
         {
             // Add code that runs before each test method
-            this._fixture = new AutoFixture.Fixture();
+            _fixture = new AutoFixture.Fixture();
         }
         [Test]
         public void TestCanCreateEmptyStore()

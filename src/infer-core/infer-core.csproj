@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Inference.Core</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="owl2-class\01-cls-thing.rq" />
     <None Remove="owl2-class\02-cls-nothing1.rq" />
@@ -84,7 +82,6 @@
     <None Remove="rdfs-rules\rdfs8.rq" />
     <None Remove="rdfs-rules\rdfs9.rq" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="owl2-equality\02-eq-sym.rq" />
     <EmbeddedResource Include="owl2-equality\03-eq-trans.rq" />
@@ -144,7 +141,6 @@
     <EmbeddedResource Include="rdfs-rules\rdfs6.rq" />
     <EmbeddedResource Include="rdfs-rules\rdfs5.rq" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="dotNetRDF" Version="2.2.0" />
@@ -152,9 +148,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.1" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="owl2-class\01-cls-thing.rq" />
     <EmbeddedResource Include="owl2-class\02-cls-nothing1.rq" />
@@ -176,9 +171,7 @@
     <EmbeddedResource Include="owl2-class\18-cls-maxqc4.rq" />
     <EmbeddedResource Include="owl2-class\19-cls-oo.rq" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="owl2-equality\01-eq-ref.rq" />
   </ItemGroup>
-
 </Project>

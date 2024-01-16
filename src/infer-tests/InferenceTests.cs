@@ -1,5 +1,6 @@
 using Autofac;
 using Inference.Core;
+using static Inference.Storage.UriHelpers;
 using NUnit.Framework;
 using System.Linq;
 
@@ -30,7 +31,7 @@ namespace Inference.Test
             _assert("a:D", "rdfs:subClassOf", "a:E");
             Assert.False(is_asserted("a:A", "rdfs:subClassOf", "a:E"));
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(u("#"));
             Assert.True(is_asserted("a:A", "rdfs:subClassOf", "a:E"));
         }
         [Test]
@@ -46,7 +47,7 @@ namespace Inference.Test
             _assert("a:x", "a:A", "a:y");
             Assert.False(is_asserted("a:x", "a:E", "a:y"));
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(u("#"));
             Assert.True(is_asserted("a:x", "a:E", "a:y"));
         }
 
@@ -59,7 +60,7 @@ namespace Inference.Test
             _assert("a:Anne", "a:isWifeOf", "a:Charlie");
             Assert.False(is_asserted("a:Charlie", "rdf:type", "a:Person"));
             var inf = _container.Resolve<IInferenceEngine>();
-            inf.Infer();
+            inf.Infer(u("#"));
             Assert.True(is_asserted("a:Charlie", "rdf:type", "a:Person"));
         }
     }

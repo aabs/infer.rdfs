@@ -24,11 +24,11 @@ namespace Inference.Storage
                         Resize(ref triples, triples.Length + ArraySizeIncrement);
                     }
                     destinationIndex = nextIndex++;
-                    var tt = t.Get();
+                    var (s,p,o) = t.Get();
 
-                    triples[destinationIndex, 0] = tt.Item1;
-                    triples[destinationIndex, 1] = tt.Item2;
-                    triples[destinationIndex, 2] = tt.Item3;
+                    triples[destinationIndex, 0] = s;
+                    triples[destinationIndex, 1] = p;
+                    triples[destinationIndex, 2] = o;
                     _tripleMap[t.GetHashCode()] = destinationIndex;
                     return destinationIndex;
                 }

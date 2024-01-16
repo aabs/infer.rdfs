@@ -76,7 +76,7 @@ namespace Inference.Storage
             {
                 _store = store.Stores.SelectMany(x => x.Value).GetEnumerator();
                 _current = null;
-                this.ctStore = store;
+                ctStore = store;
             }
 
             public bool MoveNext() => _store.MoveNext();
